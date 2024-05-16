@@ -24,11 +24,18 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'nom' => fake()->lastName(),
+            'prenom' => fake()->firstName(),
             'email' => fake()->unique()->safeEmail(),
+            'telephone' => fake()->phoneNumber(),
+            'adresse' => fake()->address(),
+            'date_naissance' => fake()->date(),
+            'lieu_naissance' => fake()->city(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            // comment on lance les seedesr
+            // php artisan db:seed --class=UserSeeder
         ];
     }
 

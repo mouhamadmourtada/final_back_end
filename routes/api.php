@@ -50,13 +50,13 @@ Route::middleware('auth:api')->group(function () {
         =           etudiants           =
         =============================*/
 
-        Route::apiResource('/etudiants', \App\Http\Controllers\API\EtudiantController::class);
-        Route::group([
-        'prefix' => 'etudiants',
-        ], function() {
-            Route::get('{id}/restore', [\App\Http\Controllers\API\EtudiantController::class, 'restore']);
-            Route::delete('{id}/permanent-delete', [\App\Http\Controllers\API\EtudiantController::class, 'permanentDelete']);
-        });
+        // Route::apiResource('/etudiants', \App\Http\Controllers\API\EtudiantController::class);
+        // Route::group([
+        // 'prefix' => 'etudiants',
+        // ], function() {
+        //     Route::get('{id}/restore', [\App\Http\Controllers\API\EtudiantController::class, 'restore']);
+        //     Route::delete('{id}/permanent-delete', [\App\Http\Controllers\API\EtudiantController::class, 'permanentDelete']);
+        // });
         /*=====  End of etudiants   ======*/
 });
 
