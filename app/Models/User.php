@@ -64,4 +64,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function fichiers()
+    {
+        return $this->morphMany(Fichier::class, 'fichierable');
+    }
 }
