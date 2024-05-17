@@ -26,8 +26,8 @@ class PermissionsSeeder extends Seeder
 
         // create roles
         $role1 = Role::create(['name' => 'admin']);
-        $role2 = Role::create(['name' => 'user']);
-        $role3 = Role::create(['name' => 'super-admin']);
+        $role2 = Role::create(['name' => 'client']);
+        $role3 = Role::create(['name' => 'chauffeur']);
         
         // assign permissions to roles
         $role1->givePermissionTo('create');
@@ -37,6 +37,7 @@ class PermissionsSeeder extends Seeder
 
         $role2->givePermissionTo('read');
 
+        $role3->givePermissionTo('read');
         // create a user
         $user = \App\Models\User::factory()->create([
             'nom' => 'User',
@@ -47,6 +48,10 @@ class PermissionsSeeder extends Seeder
             'telephone' => '555-555-5555',
             'date_naissance' => '1990-01-01',
             'lieu_naissance' => 'Paris',
+            'marque' => 'Toyota',
+            'matricule' => 'AA123AA',
+            'cin' => 'AA123456',
+            'senegalais_id' => '1',
         ]);
 
         // assign roles to user
@@ -62,10 +67,14 @@ class PermissionsSeeder extends Seeder
             'telephone' => '555-555-5555',
             'date_naissance' => '1990-01-01',
             'lieu_naissance' => 'Paris',
+            'marque' => 'Mercedes',
+            'matricule' => 'AA183AA',
+            'cin' => 'A8123456',
+            'senegalais_id' => '2',
         ]);
 
         // assign roles to user
-        $user->assignRole('user');
+        $user->assignRole('client');
 
         // create a user
         $user = \App\Models\User::factory()->create([
@@ -77,9 +86,13 @@ class PermissionsSeeder extends Seeder
             'telephone' => '555-555-5555',
             'date_naissance' => '1990-01-01',
             'lieu_naissance' => 'Paris',
+            'marque' => 'Mercedes',
+            'matricule' => 'AA1836A',
+            'cin' => 'A81235666',
+            'senegalais_id' => '3',
         ]);
 
         // assign roles to user
-        $user->assignRole('super-admin');
+        $user->assignRole('chauffeur');
     }
 }
