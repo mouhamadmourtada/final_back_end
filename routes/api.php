@@ -15,6 +15,7 @@ use App\Http\Controllers\ClientController;
 */
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChauffeurController;
 use App\Http\Controllers\TodoController;
 
 
@@ -70,9 +71,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 =============================*/
 Route::apiResource('/clients', ClientController::class);
 
+Route::apiResource('/chauffeurs',ChauffeurController::class);
+
+
 /*===========================
 =           senegalais           =
 =============================*/
+
 
 Route::apiResource('/senegalais', \App\Http\Controllers\API\SenegalaisController::class);
 Route::group([
