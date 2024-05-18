@@ -10,6 +10,7 @@ use App\Models\Senegalais;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Essa\APIToolKit\Api\ApiResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SenegalaisController extends Controller
 {
@@ -22,34 +23,60 @@ class SenegalaisController extends Controller
     public function index(): AnonymousResourceCollection
     {
         $senegalais = Senegalais::useFilters()->dynamicPaginate();
-
         return SenegalaisResource::collection($senegalais);
     }
 
     public function store(CreateSenegalaisRequest $request): JsonResponse
     {
-        $senegalais = Senegalais::create($request->validated());
-
+        $senegalais = Senegalais::create($request->validated());    
         return $this->responseCreated('Senegalais created successfully', new SenegalaisResource($senegalais));
     }
 
-    public function show(Senegalais $senegalais): JsonResponse
+    // public function show(Senegalais $senegalais): JsonResponse
+    // {
+    //     return $this->responseSuccess(null, new SenegalaisResource($senegalais));
+    // }
+
+    
+    public function show(int $id): JsonResponse
     {
-        return $this->responseSuccess(null, new SenegalaisResource($senegalais));
+        try {
+            $senegalais = Senegalais::find($id);
+            if ($senegalais) {
+                return response()->json(new SenegalaisResource($senegalais));
+            } else {
+                return response()->json(['message' => 'Senegalais not found'], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Senegalais not found', 'error' => $th->getMessage()], 404);
+        }
     }
 
-    public function update(UpdateSenegalaisRequest $request, Senegalais $senegalais): JsonResponse
+    public function update(UpdateSenegalaisRequest $request, int $senegalais): JsonResponse
     {
-        $senegalais->update($request->validated());
-
-        return $this->responseSuccess('Senegalais updated Successfully', new SenegalaisResource($senegalais));
+        try {
+            $senegalais = Senegalais::find($senegalais);
+            if ($senegalais) {
+                $senegalais->update($request->validated());
+                return $this->responseSuccess('Senegalais updated Successfully', new SenegalaisResource($senegalais));
+            } else {
+                return response()->json(['message' => 'Senegalais not found'], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed to update Senegalais', 'error' => $th->getMessage()], 400);
+        }
+        
     }
 
-    public function destroy(Senegalais $senegalais): JsonResponse
+    public function destroy(int $senegalais): JsonResponse
     {
-        $senegalais->delete();
-
-        return $this->responseDeleted();
+        $senegalais = Senegalais::find($senegalais);
+        if ($senegalais) {
+            $senegalais->delete();
+            return $this->responseDeleted();
+        } else {
+            return response()->json(['message' => 'Senegalais not found'], 404);
+        }
     }
 
    public function restore($id): JsonResponse

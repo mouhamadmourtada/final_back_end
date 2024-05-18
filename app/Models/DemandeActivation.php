@@ -21,8 +21,10 @@ class DemandeActivation extends Model
      */
     protected $fillable = [
         'user_id',
-		'etat',
+		'etat', 
     ];
+
+    protected $table = 'demandeActivations';
 
 	public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
 	{

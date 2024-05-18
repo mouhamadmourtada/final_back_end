@@ -33,23 +33,67 @@ class CourseController extends Controller
         return $this->responseCreated('Course created successfully', new CourseResource($course));
     }
 
-    public function show(Course $course): JsonResponse
+
+    public function show(int $id): JsonResponse
     {
-        return $this->responseSuccess(null, new CourseResource($course));
+        try {
+            $course = Course::find($id);
+            if ($course) {
+                return response()->json(new CourseResource($course));
+            } else {
+                return response()->json(['message' => 'Course not found'], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Course not found', 'error' => $th->getMessage()], 404);
+        }
     }
 
-    public function update(UpdateCourseRequest $request, Course $course): JsonResponse
-    {
-        $course->update($request->validated());
+    // public function update(UpdateCourseRequest $request, Course $course): JsonResponse
+    // {
+    //     $course->update($request->validated());
 
-        return $this->responseSuccess('Course updated Successfully', new CourseResource($course));
+    //     return $this->responseSuccess('Course updated Successfully', new CourseResource($course));
+    // }
+
+
+    
+    
+    
+    public function update(UpdateCourseRequest $request, int $id): JsonResponse
+    {
+        try {
+            
+
+            $course = Course::find($id);
+            if ($course) {
+                $course->update($request->validated());
+                return $this->responseSuccess('Course updated Successfully', new CourseResource($course));
+            } else {
+                return response()->json(['message' => 'Course not found'], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed to update Course', 'error' => $th->getMessage()], 400);
+        }
+        
     }
 
-    public function destroy(Course $course): JsonResponse
-    {
-        $course->delete();
+    // public function destroy(Course $course): JsonResponse
+    // {
+    //     $course->delete();
 
-        return $this->responseDeleted();
+    //     return $this->responseDeleted();
+    // }
+
+
+    public function destroy(int $id): JsonResponse
+    {
+        $course = Course::find($id);
+        if ($course) {
+            $course->delete();
+            return $this->responseDeleted();
+        } else {
+            return response()->json(['message' => 'Course not found'], 404);
+        }
     }
 
    public function restore($id): JsonResponse

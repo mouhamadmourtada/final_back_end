@@ -33,24 +33,58 @@ class AlertController extends Controller
         return $this->responseCreated('Alert created successfully', new AlertResource($alert));
     }
 
-    public function show(Alert $alert): JsonResponse
+    // public function show(Alert $alert): JsonResponse
+    // {
+    //     return $this->responseSuccess(null, new AlertResource($alert));
+    // }
+
+    public function show($id): JsonResponse
     {
-        return $this->responseSuccess(null, new AlertResource($alert));
+        try {
+            $alert = Alert::findOrFail($id);
+            return $this->responseSuccess(null, new AlertResource($alert));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Alert not found'], 404);
+        }
+    }
+    // public function update(UpdateAlertRequest $request, Alert $alert): JsonResponse
+    // {
+    //     $alert->update($request->validated());
+
+    //     return $this->responseSuccess('Alert updated Successfully', new AlertResource($alert));
+    // }
+
+
+    public function update(UpdateAlertRequest $request, $id): JsonResponse
+    {
+        try {
+            $alert = Alert::findOrFail($id);
+            $alert->update($request->validated());
+            return $this->responseSuccess('Alert updated Successfully', new AlertResource($alert));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Alert not found'], 404);
+        }
     }
 
-    public function update(UpdateAlertRequest $request, Alert $alert): JsonResponse
-    {
-        $alert->update($request->validated());
+    // public function destroy(Alert $alert): JsonResponse
+    // {
+    //     $alert->delete();
 
-        return $this->responseSuccess('Alert updated Successfully', new AlertResource($alert));
+    //     return $this->responseDeleted();
+    // }
+
+
+    public function destroy($id): JsonResponse
+    {
+        try {
+            $alert = Alert::findOrFail($id);
+            $alert->delete();
+            return $this->responseDeleted();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Alert not found'], 404);
+        }
     }
 
-    public function destroy(Alert $alert): JsonResponse
-    {
-        $alert->delete();
-
-        return $this->responseDeleted();
-    }
 
    public function restore($id): JsonResponse
     {

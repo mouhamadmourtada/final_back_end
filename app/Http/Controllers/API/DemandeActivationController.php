@@ -33,33 +33,77 @@ class DemandeActivationController extends Controller
         return $this->responseCreated('DemandeActivation created successfully', new DemandeActivationResource($demandeActivation));
     }
 
-    public function show(DemandeActivation $demandeActivation): JsonResponse
+    // public function show(DemandeActivation $demandeActivation): JsonResponse
+    // {
+    //     // gere tous les erreurs
+
+    //     return $this->responseSuccess(null, new DemandeActivationResource($demandeActivation));
+        
+    // }
+
+    public function show($id): JsonResponse
     {
-        return $this->responseSuccess(null, new DemandeActivationResource($demandeActivation));
+        try {
+            $demandeActivation = DemandeActivation::findOrFail($id);
+            return $this->responseSuccess(null, new DemandeActivationResource($demandeActivation));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Demande not found'], 404);
+        }
     }
 
-    public function update(UpdateDemandeActivationRequest $request, DemandeActivation $demandeActivation): JsonResponse
-    {
-        $demandeActivation->update($request->validated());
 
-        return $this->responseSuccess('DemandeActivation updated Successfully', new DemandeActivationResource($demandeActivation));
+    // public function update(UpdateDemandeActivationRequest $request, DemandeActivation $demandeActivation): JsonResponse
+    // {
+
+    //     try {
+    //         $demandeActivation->update($request->validated());
+    //         return $this->responseSuccess('DemandeActivation updated Successfully', new DemandeActivationResource($demandeActivation));
+    //     } catch (\Exception $e) {
+    //         return $this->responseError($e->getMessage(), $e->getCode());
+    //     }
+    // }
+
+
+
+    public function update(UpdateDemandeActivationRequest $request, $id): JsonResponse
+    {
+        try {
+            $demandeActivation = DemandeActivation::findOrFail($id);
+            $demandeActivation->update($request->validated());
+            return $this->responseSuccess('DemandeActivation updated Successfully', new DemandeActivationResource($demandeActivation));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Demande not found'], 404);
+        }
     }
 
-    public function destroy(DemandeActivation $demandeActivation): JsonResponse
-    {
-        $demandeActivation->delete();
 
-        return $this->responseDeleted();
+    // public function destroy(DemandeActivation $demandeActivation): JsonResponse
+    // {
+    //     $demandeActivation->delete();
+    //     return $this->responseDeleted();
+    // }
+
+
+
+    public function destroy($id): JsonResponse
+    {
+        try {
+            $demandeActivation = DemandeActivation::findOrFail($id);
+            $demandeActivation->delete();
+            return $this->responseDeleted();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Demande  not found'], 404);
+        }
     }
 
-   public function restore($id): JsonResponse
-    {
-        $demandeActivation = DemandeActivation::onlyTrashed()->findOrFail($id);
+    
 
-        $demandeActivation->restore();
-
-        return $this->responseSuccess('DemandeActivation restored Successfully.');
-    }
+    public function restore($id): JsonResponse
+        {
+            $demandeActivation = DemandeActivation::onlyTrashed()->findOrFail($id);
+            $demandeActivation->restore();
+            return $this->responseSuccess('DemandeActivation restored Successfully.');
+        }
 
     public function permanentDelete($id): JsonResponse
     {

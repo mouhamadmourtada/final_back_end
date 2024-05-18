@@ -33,25 +33,70 @@ class NoteController extends Controller
         return $this->responseCreated('Note created successfully', new NoteResource($note));
     }
 
-    public function show(Note $note): JsonResponse
+
+   
+
+    // public function show(Note $note): JsonResponse
+    // {
+    //     return $this->responseSuccess(null, new NoteResource($note));
+    // }
+
+    public function show(int $id): JsonResponse
     {
-        return $this->responseSuccess(null, new NoteResource($note));
+        try {
+            $note = Note::find($id);
+            if ($note) {
+                return response()->json(new NoteResource($note));
+            } else {
+                return response()->json(['message' => 'Note not found'], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Note not found', 'error' => $th->getMessage()], 404);
+        }
     }
 
-    public function update(UpdateNoteRequest $request, Note $note): JsonResponse
-    {
-        $note->update($request->validated());
+    // public function update(UpdateNoteRequest $request, Note $note): JsonResponse
+    // {
+    //     $note->update($request->validated());
 
-        return $this->responseSuccess('Note updated Successfully', new NoteResource($note));
+    //     return $this->responseSuccess('Note updated Successfully', new NoteResource($note));
+    // }
+
+
+    public function update(UpdateNoteRequest $request, int $id): JsonResponse
+    {
+        try {
+            $note = Note::find($id);
+            if ($note) {
+                $note->update($request->validated());
+                return $this->responseSuccess('Note updated Successfully', new NoteResource($note));
+            } else {
+                return response()->json(['message' => 'Note not found'], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed to update Note', 'error' => $th->getMessage()], 400);
+        }
+        
     }
 
-    public function destroy(Note $note): JsonResponse
+    // public function destroy(Note $note): JsonResponse
+    // {
+    //     $note->delete();
+
+    //     return $this->responseDeleted();
+    // }
+
+
+    public function destroy(int $id): JsonResponse
     {
-        $note->delete();
-
-        return $this->responseDeleted();
+        $note = Note::find($id);
+        if ($note) {
+            $note->delete();
+            return $this->responseDeleted();
+        } else {
+            return response()->json(['message' => 'Note not found'], 404);
+        }
     }
-
    public function restore($id): JsonResponse
     {
         $note = Note::onlyTrashed()->findOrFail($id);
