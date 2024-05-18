@@ -10,6 +10,13 @@
             <div class="overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+                      <main class="flex justify-end">
+                        <!-- component -->
+                        <button onclick="window.location.href='{{route('users.create')}}'" class="group relative h-12 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white px-5 mb-5">
+                          Ajouter un client
+                          {{-- <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div> --}}
+                        </button>
+                      </main>
                         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
                           <thead class="bg-gray-50">
                             <tr>

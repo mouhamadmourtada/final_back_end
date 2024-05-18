@@ -52,7 +52,9 @@ class DemandesController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $demande = DemandeActivation::findOrFail($id);
+        $demande->delete();
+        return redirect()->route('demandes.index');
     }
 
     public function activate(string $id)

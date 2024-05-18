@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\DemandesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DemandesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +40,7 @@ Route::middleware('auth', 'verified')->group(function () {
     
     Route::get('/admin/demandes', [DemandesController::class, 'index'])->name('demandes.index');
     Route::get('/admin/demandes/{id}', [DemandesController::class, 'show'])->name('demandes.show');
+    Route::delete('/admin/demandes/{id}', [DemandesController::class, 'destroy'])->name('demandes.destroy');
     Route::delete('/admin/users/{user}/permanent-delete', [UserController::class, 'permanentDelete'])->name('users.permanent-delete');
 });
     
