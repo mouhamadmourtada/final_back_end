@@ -87,5 +87,8 @@ class UserController extends Controller
         return view('admin.users.chauffeurs.index')->with('chauffeurs', $chauffeurs);
     }
 
-
+    public function showChauffeur(string $id) {
+        $chauffeur = User::find($id);
+        return view('admin.users.chauffeurs.show')->with('chauffeur', $chauffeur);
+    }
 }
