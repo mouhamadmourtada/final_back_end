@@ -4,14 +4,16 @@
             {{ __('Dashboard') }}
         </h2> --}}
     </x-slot>
-
+    @php
+        $randomNumber = random_int(1, 100);
+    @endphp
     <div class="px-12 py-4">
         <div class="flex gap-2">
             <div class="bg-white w-1/3 min-h-40 px-4 py-2 flex flex-col gap-6">
                 <div class="flex  py-4">
                     <div class="items-center justify-center w-10 h-10  mr-4 sm:w-20 sm:h-20">
                         <img alt="profil"
-                             src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                             src="https://randomuser.me/api/portraits/men/{{$randomNumber}}.jpg"
                              class="object-cover mx-auto rounded-full sm:w-20 sm:h-20" />
                     </div>
                     <div>
@@ -22,7 +24,7 @@
                             Email: {{ $chauffeur->email }}
                         </p>
                         <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                            Phone Number: {{ $chauffeur->telephone }}
+                            Telephone: {{ $chauffeur->telephone }}
                         </p>
                     </div>
                 </div>
@@ -32,11 +34,11 @@
                         <span class="text-black">{{ $chauffeur->created_at->format('Y-m-d') }}</span>
                     </div>
                     <div class="flex items-start flex-col">
-                        <span class="text-gray-500">Number of Courses</span>
+                        <span class="text-gray-500">Nombre de Courses</span>
                         <span class="text-black">100</span>
                     </div>
                     <div class="flex items-start flex-col">
-                        <span class="text-gray-500">Rating</span>
+                        <span class="text-gray-500">Notes</span>
                         <div class="flex items-center">
                             {{-- <span class="text-gray-500">Rating</span> --}}
                             <div class="">
@@ -52,7 +54,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="bg-white w-1/3 min-h-40  px-4 py-2 flex flex-col gap-6">
                 <div class="flex py-4">
                     <div class="items-center justify-center w-5 h-5  mr-4 sm:w-20 sm:h-20 bg-red-500 rounded-full">
@@ -62,7 +64,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            Ford Fiesta
+                            {{$chauffeur->marque}} Fiesta
                         </h3>
                         <p class="mt-1 max-w-2xl text-sm text-gray-500">
                             4 places assises
@@ -83,7 +85,7 @@
                     </div>
                     <div class="flex items-start flex-col">
                         <span class="text-gray-500">Marque</span>
-                        <span class="text-black">Ford</span>
+                        <span class="text-black">{{$chauffeur->marque}}</span>
                     </div>
                 </div>
             </div>
@@ -95,7 +97,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            125
+                            {{random_int(1, 500)}}
                         </h3>
                         <p class="mt-1 max-w-2xl text-sm text-gray-500">
                             courses realisées
@@ -139,9 +141,9 @@
             const distancesData = @json($data['distances']);
             const evaluationsData = @json($data['evaluations']);
 
-            alert(coursesData);
-            alert(distancesData);
-            alert(evaluationsData);
+            // alert(coursesData);
+            // alert(distancesData);
+            // alert(evaluationsData);
 
 
             const ctx1 = document.getElementById('coursesChart').getContext('2d');
