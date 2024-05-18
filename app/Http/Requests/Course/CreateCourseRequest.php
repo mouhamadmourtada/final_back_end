@@ -13,4 +13,24 @@ class CreateCourseRequest extends FormRequest
 			'date' => ['required', 'date'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'user_id.required' => 'Le champ user_id est obligatoire',
+            'date.required' => 'Le champ date est obligatoire',
+            'date.date' => 'Le champ date doit être une date',
+        ];      
+
+    }
+
+    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'message' => 'Validation error',
+            'errors' => $validator->errors()
+        ], 422);
+
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
+    }
 }

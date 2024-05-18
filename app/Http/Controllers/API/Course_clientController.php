@@ -29,27 +29,58 @@ class Course_clientController extends Controller
     public function store(CreateCourse_clientRequest $request): JsonResponse
     {
         $course_client = Course_client::create($request->validated());
-
         return $this->responseCreated('Course_client created successfully', new Course_clientResource($course_client));
     }
 
-    public function show(Course_client $course_client): JsonResponse
+    // public function show(Course_client $course_client): JsonResponse
+    // {
+    //     return $this->responseSuccess(null, new Course_clientResource($course_client));
+    // }
+
+    public function show($id): JsonResponse
     {
-        return $this->responseSuccess(null, new Course_clientResource($course_client));
+        try {
+            $course_client = Course_client::findOrFail($id);
+            return $this->responseSuccess(null, new Course_clientResource($course_client));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Course_client not found'], 404);
+        }
     }
 
-    public function update(UpdateCourse_clientRequest $request, Course_client $course_client): JsonResponse
-    {
-        $course_client->update($request->validated());
+    // public function update(UpdateCourse_clientRequest $request, Course_client $course_client): JsonResponse
+    // {
+    //     $course_client->update($request->validated());
 
-        return $this->responseSuccess('Course_client updated Successfully', new Course_clientResource($course_client));
+    //     return $this->responseSuccess('Course_client updated Successfully', new Course_clientResource($course_client));
+    // }
+
+    public function update(UpdateCourse_clientRequest $request, $id): JsonResponse
+    {
+        try {
+            $course_client = Course_client::findOrFail($id);
+            $course_client->update($request->validated());
+            return $this->responseSuccess('Course_client updated Successfully', new Course_clientResource($course_client));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Course_client not found'], 404);
+        }
     }
 
-    public function destroy(Course_client $course_client): JsonResponse
-    {
-        $course_client->delete();
+    // public function destroy(Course_client $course_client): JsonResponse
+    // {
+    //     $course_client->delete();
 
-        return $this->responseDeleted();
+    //     return $this->responseDeleted();
+    // }
+
+    public function destroy($id): JsonResponse
+    {
+        try {
+            $course_client = Course_client::findOrFail($id);
+            $course_client->delete();
+            return $this->responseDeleted();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Course_client not found'], 404);
+        }
     }
 
    public function restore($id): JsonResponse
