@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -28,7 +29,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'telephone' => 'required',
+            'adresse' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'cin' => 'required',
+            'date_naissance' => 'required',
+            'lieu_naissance' => 'required',
+            'role' => 'required',
+        ]);
     }
 
     /**
@@ -62,4 +74,18 @@ class UserController extends Controller
     {
         //
     }
+
+    public function getClients() {
+        $role = Role::where('name', 'client')->first();
+        $clients = $role->users;
+        return view('admin.users.clients.index')->with('clients', $clients);
+    }
+
+    public function getChauffeurs() {
+        $role = Role::where('name', 'chauffeur')->first();
+        $chauffeurs = $role->users;
+        return view('admin.users.chauffeurs.index')->with('chauffeurs', $chauffeurs);
+    }
+
+
 }
