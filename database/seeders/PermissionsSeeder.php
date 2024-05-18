@@ -19,25 +19,25 @@ class PermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        // Permission::create(['name' => 'create']);
-        // Permission::create(['name' => 'read']);
-        // Permission::create(['name' => 'update']);
-        // Permission::create(['name' => 'delete']);
+        Permission::create(['name' => 'create']);
+        Permission::create(['name' => 'read']);
+        Permission::create(['name' => 'update']);
+        Permission::create(['name' => 'delete']);
 
         // // create roles
-        // $role1 = Role::create(['name' => 'admin']);
-        // $role2 = Role::create(['name' => 'client']);
-        // $role3 = Role::create(['name' => 'chauffeur']);
+        $role1 = Role::create(['name' => 'admin']);
+        $role2 = Role::create(['name' => 'client']);
+        $role3 = Role::create(['name' => 'chauffeur']);
         
         // // assign permissions to roles
-        // $role1->givePermissionTo('create');
-        // $role1->givePermissionTo('read');
-        // $role1->givePermissionTo('update');
-        // $role1->givePermissionTo('delete');
+        $role1->givePermissionTo('create');
+        $role1->givePermissionTo('read');
+        $role1->givePermissionTo('update');
+        $role1->givePermissionTo('delete');
 
-        // $role2->givePermissionTo('read');
+        $role2->givePermissionTo('read');
 
-        // $role3->givePermissionTo('read');
+        $role3->givePermissionTo('read');
         // create a user
         $user = \App\Models\User::factory()->create([
             'nom' => 'User',
@@ -75,7 +75,7 @@ class PermissionsSeeder extends Seeder
         $user = \App\Models\User::factory()->create([
             'nom' => 'Mbaye',
             'prenom' => 'Chauffeur',
-            'email' => 'super@example.fr',
+            'email' => 'mbaye@example.fr',
             'password' => Hash::make('password'),
             'adresse' => '123 Main St',
             'telephone' => '555-555-5555',

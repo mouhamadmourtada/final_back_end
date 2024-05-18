@@ -10,7 +10,7 @@ class DemandeActivationFactory extends Factory
     {
         return [
             'user_id' => createOrRandomFactory(\App\Models\User::class),
-			'etat' => $this->faker->randomElement(['cours', 'rejetee', 'valid']),
+			'etat' => 'cours',
         ];
     }
 }
