@@ -54,7 +54,7 @@
                               </td>
                               <td class="px-6 py-4">
                                 <div class="flex justify-end gap-4">
-                                  <a x-data="{ tooltip: 'View' }" href="#">
+                                  <a x-data="{ tooltip: 'View' }"  href={{route("users.clients.show", ['id'=>$client->id]) }}>
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
                                       fill="none"

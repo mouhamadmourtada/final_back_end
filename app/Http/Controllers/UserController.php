@@ -87,8 +87,39 @@ class UserController extends Controller
         return view('admin.users.chauffeurs.index')->with('chauffeurs', $chauffeurs);
     }
 
-    public function showChauffeur(string $id) {
+    // public function showChauffeur(string $id) {
+    //     $chauffeur = User::find($id);
+    //     return view('admin.users.chauffeurs.show')->with('chauffeur', $chauffeur);
+    // }
+
+    // ChauffeurController.php
+
+    public function showChauffeur(string $id)
+    {
         $chauffeur = User::find($id);
-        return view('admin.users.chauffeurs.show')->with('chauffeur', $chauffeur);
+        $data = [
+            'courses' => [10, 15, 8, 12, 20],
+            'distances' => [100, 150, 80, 120, 200],
+            'evaluations' => [5, 4.5, 4, 5, 3.5]
+        ];
+        return view('admin.users.chauffeurs.show', compact('chauffeur', 'data'));
     }
+
+
+    public function showClient(string $id) {
+        $client = User::find($id);
+    
+        $data = [
+            'trips' => [3, 5, 2, 8, 4], 
+            'distances' => [50, 100, 30, 200, 120],
+            'expenses' => [150, 300, 90, 600, 360], 
+        ];
+    
+        return view('admin.users.clients.show', compact('client', 'data'));
+
+
+    }
+    
+
+
 }
