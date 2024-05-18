@@ -28,6 +28,7 @@
                             </tr>
                           </thead>
                           <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                            @if ($users != null)
                             @foreach ($users as $user)                    
                             <tr class="hover:bg-gray-50">
                               <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
@@ -116,13 +117,14 @@
                               </td>
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                     </div>
                 </div>
                             
                 <div class="mt-3">
-                    {{ $users->links() }}
+                   @if($users != null) {{ $users->links() }} @endif
                 </div>
             </div>
         </div>

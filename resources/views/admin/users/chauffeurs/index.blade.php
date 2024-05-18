@@ -29,6 +29,7 @@
                             </tr>
                           </thead>
                           <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                            @if ($chauffeurs != null)
                             @foreach ($chauffeurs as $chauffeur)                    
                             <tr class="hover:bg-gray-50">
                               <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
@@ -118,6 +119,7 @@
                               </td>
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                     </div>
