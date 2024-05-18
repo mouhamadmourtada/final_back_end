@@ -33,10 +33,10 @@ class UserFactory extends Factory
             'lieu_naissance' => fake()->city(),
             'marque' => fake()->company(),
             'matricule' => fake()->unique()->regexify('[A-Z]{2}[0-9]{3}[A-Z]{2}'),
-            'cin' => fake()->unique()->regexify('[A-Z]{2}[0-9]{6}'),
-            'senegalais_id' => fake()->regexify('[A-Z]{2}[0-9]{6}'),
+            'cin' => fake()->unique()->numberBetween(1000000000, 9999999999),
+            'senegalais_id' => fake()->randomDigit(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make('password1234'),
             'remember_token' => Str::random(10),
             // comment on lance les seedesr
             // php artisan db:seed --class=UserSeeder
