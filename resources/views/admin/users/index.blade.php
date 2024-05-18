@@ -8,15 +8,18 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden sm:rounded-lg ">
-                <div class="p-6 text-gray-900">
-                    <div class="overflow-hidden rounded-lg border m-5 p-5 bg-white">
-                      <main class="flex justify-end">
-                        <!-- component -->
-                        <button onclick="window.location.href='{{route('users.create')}}'" class="group relative h-12 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white px-5 mb-5">
-                          Ajouter un user
-                          {{-- <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div> --}}
-                        </button>
-                      </main>
+
+              
+                <div class="">
+
+                  <div class="w-full flex items-center justify-end">
+                    <button  onclick="window.location.href='{{route('users.create')}}'" class="group gap-1  h-12 flex items-center justify-center  text-center  overflow-hidden rounded-xl bg-chprimary text-sm hover:bg-white font-bold text-white px-5 mb-5  hover:text-chprimary hover:border-chprimary hover:border-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" class=text-white"/></svg>
+                      Ajouter un utilisateur
+                    </button>
+                  </div>
+                    <div class="overflow-hidden rounded-lg border p-5 bg-white">
+                     
                         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
                           <thead class="bg-gray-50">
                             <tr>
