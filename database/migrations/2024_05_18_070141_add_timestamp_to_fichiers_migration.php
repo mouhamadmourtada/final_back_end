@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('matricule')->nullable()->change();
+        Schema::table('fichiers', function (Blueprint $table) {
+            // il faut mettre timestamp
+            // $table->timestamp('created_at')->nullable();
+            $table->timestamps();
+
+            //
         });
     }
 
@@ -21,8 +25,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('adresse')->nullable(false)->change();
+        Schema::table('fichiers', function (Blueprint $table) {
+            //
+            $table->dropColumn('created_at');
         });
     }
 };

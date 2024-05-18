@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(5)->create();
+        // \App\Models\User::factory(100)->create();
 
         // \App\Models\User::factory()->create([
         //     'nom' => 'Test',
@@ -43,24 +43,24 @@ class DatabaseSeeder extends Seeder
         //     'senegalais_id' => '15'
         // ]);
 
-        \App\Models\DemandeActivation::factory()->create([
-            'user_id' => 8,
-            'etat' => 'cours'
-        ]);
+        // \App\Models\DemandeActivation::factory()->create([
+        //     'user_id' => 8,
+        //     'etat' => 'cours'
+        // ]);
 
-        \App\Models\DemandeActivation::factory()->create([
-            'user_id' => 9,
-            'etat' => 'cours'
-        ]);
+        // \App\Models\DemandeActivation::factory()->create([
+        //     'user_id' => 9,
+        //     'etat' => 'cours'
+        // ]);
 
-        \App\Models\DemandeActivation::factory()->create([
-            'user_id' => 10,
-            'etat' => 'cours'
-        ]);
+        // \App\Models\DemandeActivation::factory()->create([
+        //     'user_id' => 10,
+        //     'etat' => 'cours'
+        // ]);
 
-        \App\Models\DemandeActivation::factory()->create([
-            'user_id' => 11,
-            'etat' => 'cours'
-        ]);
+        // \App\Models\DemandeActivation::factory()->create([
+        //     'user_id' => 11,
+        //     'etat' => 'cours'
+        // ]);
     }
 }
