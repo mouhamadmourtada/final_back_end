@@ -152,3 +152,11 @@ Route::group([
     Route::delete('{id}/permanent-delete', [\App\Http\Controllers\API\Course_clientController::class, 'permanentDelete']);
 });
 /*=====  End of course_clients   ======*/
+
+/*===========================
+=           chauffeurs           =
+=============================*/
+
+Route::apiResource('/chauffeurs', \App\Http\Controllers\API\ChauffeurController::class);
+
+/*=====  End of chauffeurs   ======*/

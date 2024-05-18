@@ -20,8 +20,8 @@ return new class extends Migration
 			$table->string('adresse');
 			$table->date('date_naissance');
 			$table->string('lieu_naissance');
-			$table->string('cin')->unique();
-			$table->string('telephone')->unique();
+			$table->string('cin');
+			$table->string('telephone');
             $table->softDeletes();
             $table->timestamps();
         });
