@@ -7,9 +7,16 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="overflow-hidden sm:rounded-lg ">
                 <div class="p-6 text-gray-900">
-                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+                    <div class="overflow-hidden rounded-lg border m-5 p-5 bg-white">
+                      <main class="flex justify-end">
+                        <!-- component -->
+                        <button onclick="window.location.href='{{route('users.create')}}'" class="group relative h-12 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white px-5 mb-5">
+                          Ajouter un user
+                          {{-- <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div> --}}
+                        </button>
+                      </main>
                         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
                           <thead class="bg-gray-50">
                             <tr>
@@ -41,6 +48,7 @@
                                   {{$user->telephone}}
                                 </span>
                               </td>
+                              {{-- test --}}
                               <td class="px-6 py-4">{{$user->getRolenames()->implode(', ')}}</td>
                               <td class="px-6 py-4">
                                 <div class="flex gap-2">
@@ -53,6 +61,23 @@
                               </td>
                               <td class="px-6 py-4">
                                 <div class="flex justify-end gap-4">
+                                  <a x-data="{ tooltip: 'View' }" href="#">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke-width="1.5"
+                                      stroke="currentColor"
+                                      class="h-6 w-6"
+                                      x-tooltip="tooltip"
+                                    >
+                                      <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M15 12c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zM2.458 12C3.732 7.943 7.607 5 12 5c4.393 0 8.268 2.943 9.542 7-.001.001-.001.003-.002.005a1.5 1.5 0 010 1.99A13.09 13.09 0 0112 19c-4.393 0-8.268-2.943-9.542-7A1.5 1.5 0 012.458 12z"
+                                      />
+                                    </svg>
+                                  </a>                                  
                                   <a x-data="{ tooltip: 'Delete' }" href="#">
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"

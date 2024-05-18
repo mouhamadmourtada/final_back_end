@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DemandesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('admin/users', UserController::class)
-    ->middleware('auth', 'verified', 'can:manage-users');
+
+Route::middleware('auth', 'verified')->group(function () {
+    Route::resource('admin/users', UserController::class);
+    Route::get('/admin/clients', [UserController::class, 'getClients'])->name('users.clients.getClients');
+    Route::get('/admin/chauffeurs', [UserController::class, 'getChauffeurs'])->name('users.chauffeurs.getChauffeurs');
+    Route::get('/admin/chauffeurs/{id}', [UserController::class, 'showChauffeur'])->name('users.chauffeurs.show');
+    Route::get('/admin/clients/{id}', [UserController::class, 'showClient'])->name('users.clients.show');
+    
+    Route::get('/admin/demandes', [DemandesController::class, 'index'])->name('demandes.index');
+    Route::get('/admin/demandes/{id}', [DemandesController::class, 'show'])->name('demandes.show');
+    Route::delete('/admin/demandes/{id}', [DemandesController::class, 'destroy'])->name('demandes.destroy');
+    Route::delete('/admin/users/{user}/permanent-delete', [UserController::class, 'permanentDelete'])->name('users.permanent-delete');
+});
     
 require __DIR__.'/auth.php';
