@@ -5,121 +5,211 @@
         </h2> --}}
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
-                        <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-                          <thead class="bg-gray-50">
-                            <tr>
-                              <th scope="col" class="px-6 py-4 font-medium text-gray-900">Nom</th>
-                              <th scope="col" class="px-6 py-4 font-medium text-gray-900">CIN</th>
-                              <th scope="col" class="px-6 py-4 font-medium text-gray-900">Phone</th>
-                              <th scope="col" class="px-6 py-4 font-medium text-gray-900">Matricule</th>
-                              <th scope="col" class="px-6 py-4 font-medium text-gray-900">Adresse</th>
-                              <th scope="col" class="px-6 py-4 font-medium text-gray-900">Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-                            @foreach ($chauffeurs as $chauffeur)                    
-                            <tr class="hover:bg-gray-50">
-                              <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                                <div class="relative h-10 w-10">
-                                  
-                                  <span class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
-                                </div>
-                                <div class="text-sm">
-                                  <div class="font-medium text-gray-700">{{$chauffeur->prenom}} {{$chauffeur->nom}} </div>
-                                  <div class="text-gray-400">{{$chauffeur->email}}</div>
-                                </div>
-                             </th>
-                              <td class="px-6 py-4">{{$chauffeur->cin}}</td>
-                              <td class="px-6 py-4">
-                                <span
-                                  class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600"
-                                >
-                                  <span class="h-1.5 w-1.5 rounded-full bg-green-600"></span>
-                                  {{$chauffeur->telephone}}
-                                </span>
-                              </td>
-                              {{-- test --}}
-                              <td class="px-6 py-4">{{$chauffeur->matricule}}</td>
-                              <td class="px-6 py-4">
-                                <div class="flex gap-2">
-                                  <span
-                                    class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
-                                  >
-                                    {{$chauffeur->adresse}}
-                                  </span>
-                                </div>
-                              </td>
-                              <td class="px-6 py-4">
-                                <div class="flex justify-end gap-4">
-                                  <a x-data="{ tooltip: 'View' }" href="#">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke-width="1.5"
-                                      stroke="currentColor"
-                                      class="h-6 w-6"
-                                      x-tooltip="tooltip"
-                                    >
-                                      <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M15 12c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zM2.458 12C3.732 7.943 7.607 5 12 5c4.393 0 8.268 2.943 9.542 7-.001.001-.001.003-.002.005a1.5 1.5 0 010 1.99A13.09 13.09 0 0112 19c-4.393 0-8.268-2.943-9.542-7A1.5 1.5 0 012.458 12z"
-                                      />
-                                    </svg>
-                                  </a>                                  
-                                  <a x-data="{ tooltip: 'Delete' }" href="#">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke-width="1.5"
-                                      stroke="currentColor"
-                                      class="h-6 w-6"
-                                      x-tooltip="tooltip"
-                                    >
-                                      <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                                      />
-                                    </svg>
-                                  </a>
-                                  <a x-data="{ tooltip: 'Edite' }" href="#">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke-width="1.5"
-                                      stroke="currentColor"
-                                      class="h-6 w-6"
-                                      x-tooltip="tooltip"
-                                    >
-                                      <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-                                      />
-                                    </svg>
-                                  </a>
-                                </div>
-                              </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+    <div class="px-12 py-4">
+        <div class="flex gap-2">
+            <div class="bg-white w-1/3 min-h-40 px-4 py-2 flex flex-col gap-6">
+                <div class="flex  py-4">
+                    <div class="items-center justify-center w-10 h-10  mr-4 sm:w-20 sm:h-20">
+                        <img alt="profil"
+                             src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                             class="object-cover mx-auto rounded-full sm:w-20 sm:h-20" />
+                    </div>
+                    <div>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            {{ $chauffeur->prenom }} {{ $chauffeur->nom }}
+                        </h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                            Email: {{ $chauffeur->email }}
+                        </p>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                            Phone Number: {{ $chauffeur->telephone }}
+                        </p>
                     </div>
                 </div>
-                            
-                <div class="mt-3">
-                    {{-- {{ $chauffeurs->links() }} --}}
+                <div class="flex items-start justify-between">
+                    <div class="flex flex-col">
+                        <span class="text-gray-500">Joined</span>
+                        <span class="text-black">{{ $chauffeur->created_at->format('Y-m-d') }}</span>
+                    </div>
+                    <div class="flex items-start flex-col">
+                        <span class="text-gray-500">Number of Courses</span>
+                        <span class="text-black">100</span>
+                    </div>
+                    <div class="flex items-start flex-col">
+                        <span class="text-gray-500">Rating</span>
+                        <div class="flex items-center">
+                            {{-- <span class="text-gray-500">Rating</span> --}}
+                            <div class="">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= 3)
+                                        <span class="text-yellow-500">&#9733;</span> <!-- Étoile pleine -->
+                                    @else
+                                        <span class="text-gray-400">&#9734;</span> <!-- Étoile vide -->
+                                    @endif
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white w-1/3 min-h-40  px-4 py-2 flex flex-col gap-6">
+                <div class="flex py-4">
+                    <div class="items-center justify-center w-5 h-5  mr-4 sm:w-20 sm:h-20 bg-red-500 rounded-full">
+                        <img alt="profil"
+                             src="https://static.vecteezy.com/ti/vecteur-libre/p3/5439465-conception-d-illustration-de-dessin-anime-de-voiture-de-couleur-rouge-gratuit-vectoriel.jpg"
+                             class="object-cover sm:w-20 sm:h-20" />
+                    </div>
+                    <div>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Ford Fiesta
+                        </h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                            4 places assises
+                        </p>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                            Rouge
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start justify-between">
+                    <div class="flex flex-col">
+                        <span class="text-gray-500">Matricule</span>
+                        <span class="text-black">{{ $chauffeur->matricule }}</span>
+                    </div>
+                    <div class="flex items-start flex-col">
+                        <span class="text-gray-500">Plaque</span>
+                        <span class="text-black">A522 wwww</span>
+                    </div>
+                    <div class="flex items-start flex-col">
+                        <span class="text-gray-500">Marque</span>
+                        <span class="text-black">Ford</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white w-1/3 min-h-40   px-4 py-2 flex flex-col gap-6">
+                <div class="flex py-4">
+                    <div class="items-center justify-center w-5 h-5  mr-4 p-4 text-white sm:w-20 sm:h-20 bg-red-500 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10.5v2a1 1 0 0 1-1 1H1.5a1 1 0 0 1-1-1V5a3 3 0 0 1 3-3H10v2.5"/><path d="M13 7.5H9.5A.5.5 0 0 0 9 8v2a.5.5 0 0 0 .5.5H13a.5.5 0 0 0 .5-.5V8a.5.5 0 0 0-.5-.5m-1 0v-2a1 1 0 0 0-1-1H3.5"/></g></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            125
+                        </h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                            courses realisées
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start justify-between">
+                    <div class="flex flex-col">
+                        <span class="text-gray-500">Economie realise</span>
+                        <span class="text-black">123456 Fcfa</span>
+                    </div>
+                    <div class="flex items-start flex-col">
+                        <span class="text-gray-500">Comission</span>
+                        <span class="text-black">12000 Fcfa</span>
+                    </div>
                 </div>
             </div>
         </div>
+
+        {{-- Charts --}}
+        <div class="flex flex-wrap items-center justify-between mt-8 p-4 bg-white">
+
+            <div class="w-full md:w-1/2 lg:w-1/3">
+                <canvas id="coursesChart"></canvas>
+            </div>
+            <div class="w-full md:w-1/2 lg:w-1/3">
+                <canvas id="distancesChart"></canvas>
+            </div>
+            
+            <div class="w-full md:w-1/2 lg:w-1/3">
+                <canvas id="evaluationsChart"></canvas>
+            </div>
+        </div>
     </div>
+
+    {{-- Inclure les scripts directement si `@section('scripts')` ne fonctionne pas --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const coursesData = @json($data['courses']);
+            const distancesData = @json($data['distances']);
+            const evaluationsData = @json($data['evaluations']);
+
+            alert(coursesData);
+            alert(distancesData);
+            alert(evaluationsData);
+
+
+            const ctx1 = document.getElementById('coursesChart').getContext('2d');
+            const ctx2 = document.getElementById('distancesChart').getContext('2d');
+            const ctx3 = document.getElementById('evaluationsChart').getContext('2d');
+
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Courses',
+                        data: coursesData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Distances (km)',
+                        data: distancesData,
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            new Chart(ctx3, {
+                type: 'radar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Evaluations',
+                        data: evaluationsData,
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </x-app-layout>
